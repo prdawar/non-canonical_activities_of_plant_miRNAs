@@ -3,7 +3,7 @@ library(tidyr)
 library(tidyverse)
 library(DESeq2)
 getwd()
-setwd("../../Downloads/PD_chapter4/miRNA_biogenesis_mutants_RNA_Seq_kallisto_results/In_use/")
+setwd("set your working directory")
 abundance_files <- list.files(pattern = "\\.txt$")
 abundance_files <- abundance_files[abundance_files != "metadata.txt"]
 # Read and store each file into a list of data frames
@@ -69,6 +69,21 @@ Genotype_dcl1_9_vs_Col_0 <- as.data.frame(results(Deseq_RNA, name = "Genotype_dc
 Genotype_se_vs_Col_0 <- as.data.frame(results(Deseq_RNA, name = "Genotype_se_vs_Col_0")) %>% rownames_to_column(var = "Locus")
 Genotype_se_1_vs_Col_0 <- as.data.frame(results(Deseq_RNA, name = "Genotype_se_1_vs_Col_0")) %>% rownames_to_column(var = "Locus")
 
+rename_with_suffix <- function(df, suffix) {
+  df %>%
+    dplyr::rename_with(~ ifelse(.x != "Locus", paste0(.x, "_", suffix), .x))
+}
+
+merged_list_all <- list(
+  ago1_27 = rename_with_suffix(Genotype_ago1_27_vs_Col_0, "ago1_27"),
+  dcl1_5  = rename_with_suffix(Genotype_dcl1_5_vs_Col_0, "dcl1_5"),
+  dcl1_9  = rename_with_suffix(Genotype_dcl1_9_vs_Col_0, "dcl1_9"),
+  se      = rename_with_suffix(Genotype_se_vs_Col_0, "se"),
+  se_1    = rename_with_suffix(Genotype_se_1_vs_Col_0, "se_1")
+)
+merged_list_all <- Reduce(function(x, y) merge(x, y, by = "Locus", all = TRUE), merged_list_all) %>% select(Locus, matches("log2|padj|base"))
+#write.csv(merged_list_all, file = "merged_RNAseq_results_all.csv")
+
 Genotype_ago1_27_vs_Col_0_sig <- Genotype_ago1_27_vs_Col_0 %>%
   filter(padj < 0.05)
 Genotype_dcl1_5_vs_Col_0_sig <- Genotype_dcl1_5_vs_Col_0 %>%
@@ -94,10 +109,10 @@ sig_list <- list(
 )
 
 merged_list <- Reduce(function(x, y) merge(x, y, by = "Locus", all = TRUE), sig_list) %>% select(Locus, matches("log2|padj|base"))
-write.csv(merged_list, file = "merged_RNAseq_results.csv")
+#write.csv(merged_list, file = "merged_RNAseq_results.csv")
 
-known_targets <- read.delim("../../In_use/known_targets_all.txt")
-novel_targets <- read.delim("../../In_use/novel_targets_all.txt")
+known_targets <- read.delim("../../known_targets_all.txt")
+novel_targets <- read.delim("../../novel_targets_all.txt")
 
 sig_pri_miRNAs <- merged_list %>%
   filter(str_detect(Locus, "ath-MIR")) %>%
