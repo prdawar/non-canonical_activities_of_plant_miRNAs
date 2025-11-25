@@ -2,6 +2,7 @@ library(dplyr)
 library(tidyr)
 library(tidyverse)
 library(DESeq2)
+
 getwd()
 setwd("set your working directory")
 abundance_files <- list.files(pattern = "\\.txt$")
@@ -108,7 +109,9 @@ sig_list <- list(
   se_1    = rename_with_suffix(Genotype_se_1_vs_Col_0_sig, "se_1")
 )
 
-merged_list <- Reduce(function(x, y) merge(x, y, by = "Locus", all = TRUE), sig_list) %>% select(Locus, matches("log2|padj|base"))
+merged_list <- Reduce(function(x, y) merge(x, y, by = "Locus", all = TRUE), sig_list) %>% 
+  select(Locus, matches("log2|padj|base")) %>%
+  filter(!grepl("ath-MIR844_chr2_9942051-9942435|ath-MIR400_chr1_11785836-11786137", Locus))
 #write.csv(merged_list, file = "merged_RNAseq_results.csv")
 
 known_targets <- read.delim("../../known_targets_all.txt")

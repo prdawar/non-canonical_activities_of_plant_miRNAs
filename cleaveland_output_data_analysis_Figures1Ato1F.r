@@ -92,7 +92,7 @@ final_list_canonical %>%
                             signif_group = "Degradome Evidence",
                             mfe_group = "MFEratio",
                             allen_group = "AllenScore")) %>%
-  dplyr::count(parameter, status, name = "n") %>% view()
+  dplyr::count(parameter, status, name = "n") %>%
 ggplot(aes(x = status, y = n, fill = parameter)) +
   geom_bar(stat = "identity", 
            position = position_dodge(width = 0.62), width = 0.6) +
