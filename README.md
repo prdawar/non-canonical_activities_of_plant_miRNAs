@@ -10,5 +10,8 @@ Pranav Dawar<sup>1,2</sup>, Bhumika Jayee<sup>3</sup>, Isaac R. Eason<sup>4</sup
 
 <sup>4</sup> Department of Chemistry and Biochemistry, Texas Tech University, Lubbock, TX 79409, USA
 
-*Correspondence. Email: chris.rock@ttu.edu [ORCID: 0000-0002-2090-0650]
+*Correspondence. Email: chris.rock@ttu.edu
 
+Running head: Expanding miRNA Regulatory Activities in A. thaliana
+
+Key words: plant miRNA, canonical activity, non-canonical activity, Argonaute10, Post Transcriptional Gene Silencing
