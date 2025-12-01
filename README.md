@@ -14,4 +14,4 @@ Pranav Dawar<sup>1,2</sup>, Bhumika Jayee<sup>3</sup>, Isaac R. Eason<sup>4</sup
 
 Running head: Expanding miRNA Regulatory Activities in A. thaliana
 
-Key words: plant miRNA, canonical activity, non-canonical activity, Argonaute10, Post Transcriptional Gene Silencing
+Key words: plant miRNA, canonical activity, non-canonical activity, Argonaute10, Post Transcriptional Gene Silencing, degradome analysis
