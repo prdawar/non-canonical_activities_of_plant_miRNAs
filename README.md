@@ -11,5 +11,17 @@ Key words: plant miRNA, canonical activity, non-canonical activity, Argonaute10,
 
 | File Name | Description |
 | --- | --- |
-| `git status` | List all *new or modified* files |
-| `git diff` | Show file differences that **haven't been** staged |
+| `PRJNA336058_abundance.txt` | kallisto output for fastq files used from project PRJNA336058 |
+| `PRJNA388207_abundance.txt` | kallisto output for fastq files used from project PRJNA388207 |
+| `PRJNA545832_abundance.txt` | kallisto output for fastq files used from project PRJNA545832 |
+| `PRJNA788534_single_end_abundance.txt` | kallisto output for fastq files used from project PRJNA788534 |
+| `RMSD_RNA.py` | python script to calculate RMSD for RNA duplexes within each conformation. The analysis focused exclusively on the RNA chains B (miRNA) and C (target mRNA) |
+| `align_per_domain_plddt.py` | python script to calculate RMSD for protein (AGO10) domains using a custom Python workflow built on the Bio.PDB module from Biopython. The experimental cryo-EM structure (PDB ID: 7SWF) was used as the reference  |
+| `com_distance_domain_rna.py` | python script to assess spatial relationship between individual protein domains and the RNA component |
+| `run_align_per_domain_plddt.txt` | To run align_per_domain_plddt.py |
+| `run_com_distance_domain_rna.txt` | To run com_distance_domain_rna.py |
+| `structural_results_data_analysis.r` | R script used to generate Figures 4B to 4D in the main text |
+| `cleaveland_output_data_analysis_Figures1Ato1F.r` | R script used to generate Figures 1A to 1F in the main text |
+| `RNAseq_analysis_Figures3Ato3C.r` | R script used to generate Figures 3A to 3C in the main text |
+| `degradome_results_all.zip` | CleaveLand output for degradome sequencing analysis reporting all slicing events with MFE ration >= 0.65 |
+| `T_plots_MFE_0.6_0.65.txt` | CleaveLand output for degradome sequencing analysis reporting all slicing events with MFE ration >= 0.6 to < 0.65 |
