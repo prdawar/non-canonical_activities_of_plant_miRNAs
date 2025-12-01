@@ -26,9 +26,9 @@ degradome_all_clean <- degradome_all %>%
   filter(signif_count > 0)
 #write.csv(degradome_all_clean, file = "degradome_all_clean_11_17_25.csv")
 
-canonical_targets <- read.delim("./canonical_miRNA_targets.txt", header = TRUE)
-canonical_targets <- canonical_targets %>%
-  mutate(Query.and.Transcript = paste(canonical_targets$Interacting.miRNA, canonical_targets$Target, sep = "&")) %>% 
+known_targets <- read.delim("./known_miRNA_targets.txt", header = TRUE)
+known_targets <- known_targets %>%
+  mutate(Query.and.Transcript = paste(known_targets$Interacting.miRNA, known_targets$Target, sep = "&")) %>% 
   select(Query.and.Transcript, Target, Interacting.miRNA)
 
 degradome_all_clean <- degradome_all_clean %>%
@@ -65,7 +65,7 @@ degradome_all_clean_meta_new <- degradome_all_clean_meta %>%
 
 degradome_all_clean_canonical <- degradome_all_clean %>%
   filter(apply(degradome_all_clean, 1, function(row) {
-    any(sapply(canonical_targets$Query.and.Transcript, function(pattern) {
+    any(sapply(known_targets$Query.and.Transcript, function(pattern) {
       grepl(pattern, paste(row, collapse = " "))
     }))
   }))
@@ -102,7 +102,7 @@ ggplot(aes(x = status, y = n, fill = parameter)) +
                                "MFEratio" = "#DDA0DD",
                                "AllenScore" = "#9ACD32")) +
   theme_minimal(base_size = 20)
-#ggsave("canonical_targets_metrics_11_17_25.png", width = 8, height = 6, bg = "white")
+#ggsave("known_targets_metrics_11_17_25.png", width = 8, height = 6, bg = "white")
 #write.csv(final_list_canonical, "final_list_canonical_11_17_25.csv")
 
 degradome_all_clean_noncanonical <- degradome_all %>%
@@ -123,7 +123,7 @@ degradome_all_clean_noncanonical <- degradome_all %>%
                                      replacement = "\\1&\\2",
                                      Query.and.Transcript)) %>%
   filter(apply(., 1, function(row) {
-    all(sapply(canonical_targets$Query.and.Transcript, function(pattern) {
+    all(sapply(known_targets$Query.and.Transcript, function(pattern) {
       !grepl(pattern, paste(row, collapse = " "))
     }))
   }))
@@ -156,7 +156,7 @@ degradome_all_clean_noncanonical_meta <- degradome_all %>%
                                      replacement = "\\1&\\2",
                                      Query.and.Transcript)) %>%
   filter(apply(., 1, function(row) {
-    all(sapply(canonical_targets$Query.and.Transcript, function(pattern) {
+    all(sapply(known_targets$Query.and.Transcript, function(pattern) {
       !grepl(pattern, paste(row, collapse = " "))
     }))
   })) %>%
@@ -192,7 +192,7 @@ degradome_all_clean_noncanonical_cc_1 <- degradome_all %>%
                                      replacement = "\\1&\\2",
                                      Query.and.Transcript)) %>%
   filter(apply(., 1, function(row) {
-    all(sapply(canonical_targets$Query.and.Transcript, function(pattern) {
+    all(sapply(known_targets$Query.and.Transcript, function(pattern) {
       !grepl(pattern, paste(row, collapse = " "))
     }))
   }))
@@ -228,7 +228,7 @@ degradome_all_clean_noncanonical_cc_0 <- degradome_all %>%
                                      replacement = "\\1&\\2",
                                      Query.and.Transcript)) %>%
   filter(apply(., 1, function(row) {
-    all(sapply(canonical_targets$Query.and.Transcript, function(pattern) {
+    all(sapply(known_targets$Query.and.Transcript, function(pattern) {
       !grepl(pattern, paste(row, collapse = " "))
     }))
   }))
